@@ -11,7 +11,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'prettier/vim-prettier'
-Plug 'marijnh/tern_for_vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'dyng/ctrlsf.vim'
 "Plug 'ncm2/ncm2'
@@ -22,6 +21,9 @@ Plug 'dyng/ctrlsf.vim'
 "Plug 'ncm2/ncm2-bufword'
 "Plug 'ncm2/ncm2-path'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'morhetz/gruvbox'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'iamcco/mathjax-support-for-mkdp'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -37,7 +39,7 @@ syntax on
 
 " 使用配色
 set background=dark
-colorscheme PaperColor
+colorscheme gruvbox
 
 " 打开文件类型检测
 filetype on
@@ -231,3 +233,13 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 inoremap jj <esc>
+
+"coc-prettier
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+"markdown preview
+nmap <silent> <F8> <Plug>MarkdownPreview       
+imap <silent> <F8> <Plug>MarkdownPreview        
+nmap <silent> <F9> <Plug>StopMarkdownPreview    
+imap <silent> <F9> <Plug>StopMarkdownPreview    
