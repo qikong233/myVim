@@ -24,6 +24,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'mhinz/vim-startify'
+"Plug 'Yggdroot/indentLine'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -64,7 +66,7 @@ let mapleader=","
 
 " 保存退出
 nmap <Leader>w :w<CR>
-nmap <Leader>q :q!<CR>
+nmap <Leader>q :q<CR>
 
 " 设置界面跳转
 nnoremap <C-h> <C-w>h
@@ -243,3 +245,11 @@ nmap <silent> <F8> <Plug>MarkdownPreview
 imap <silent> <F8> <Plug>MarkdownPreview        
 nmap <silent> <F9> <Plug>StopMarkdownPreview    
 imap <silent> <F9> <Plug>StopMarkdownPreview    
+
+"代码移动
+nmap <C-j> mz:m+<cr>`z
+nmap <C-k> mz:m-2<cr>`z
+vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z 
+
+
