@@ -13,19 +13,15 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'prettier/vim-prettier'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'dyng/ctrlsf.vim'
-"Plug 'ncm2/ncm2'
-"Plug 'roxma/nvim-yarp'
-"Plug 'roxma/vim-hug-neovim-rpc'
-"autocmd BufEnter * call ncm2#enable_for_buffer()
-"set completeopt=noinsert,menuone,noselect
-"Plug 'ncm2/ncm2-bufword'
-"Plug 'ncm2/ncm2-path'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'mhinz/vim-startify'
-"Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
+Plug 'ternjs/tern_for_vim'
+Plug 'ayu-theme/ayu-vim'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -40,8 +36,15 @@ map <F3> :NERDTreeToggle<CR>
 syntax on
 
 " 使用配色
-set background=dark
-colorscheme gruvbox
+" theme 1
+"set background=dark
+"colorscheme gruvbox
+" theme 2
+set termguicolors     " enable true colors support
+"let ayucolor="light"  " for light version of theme
+"let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 " 打开文件类型检测
 filetype on
@@ -77,10 +80,6 @@ nnoremap <C-l> <C-w>l
 nmap H ^
 nmap L $
 
-" 快速调整
-nmap J 3j
-nmap K 3k
-
 " 设置实时搜索
 set incsearch
 " 开启大小写不敏感
@@ -100,7 +99,6 @@ let g:coc_global_extensions = [
 			\ 'coc-snippets',
 			\ 'coc-pairs',
 			\ 'coc-tsserver',
-			\ 'coc-eslint',
 			\ 'coc-prettier',
 			\ 'coc-json',
 			\ ]
@@ -252,4 +250,9 @@ nmap <C-k> mz:m-2<cr>`z
 vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z 
 
+" 快速调整
+nmap J 3j
+nmap K 3k
 
+" tagbar
+nmap <F5> :TagbarToggle<CR>
