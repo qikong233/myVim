@@ -32,6 +32,9 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 map <F3> :NERDTreeMirror<CR>
 map <F3> :NERDTreeToggle<CR>
 
+nnoremap <TAB> :NERDTreeMirror<CR>
+nnoremap <TAB> :NERDTreeToggle<CR>
+
 " 语法高亮
 syntax on
 
