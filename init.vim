@@ -35,16 +35,20 @@ map <F3> :NERDTreeToggle<CR>
 " 语法高亮
 syntax on
 
+set cursorline
+set wrap
+set showcmd
+
 " 使用配色
 " theme 1
-"set background=dark
-"colorscheme gruvbox
+set background=dark
+colorscheme gruvbox
 " theme 2
-set termguicolors     " enable true colors support
+"set termguicolors     " enable true colors support
 "let ayucolor="light"  " for light version of theme
 "let ayucolor="mirage" " for mirage version of theme
-let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+"let ayucolor="dark"   " for dark version of theme
+"colorscheme ayu
 
 " 打开文件类型检测
 filetype on
@@ -61,12 +65,11 @@ set t_Co=256 " 状态栏就有颜色了
 let g:jsx_ext_required = 1
 let g:jsx_pragma_required = 1
 
-" 进入打开nerdtree
-"let g:nerdtree_tabs_open_on_console_startup=1
-
 " 设置自己的leader
 let mapleader=","
 
+" 分屏
+nmap <Leader>v :vsplit<CR>
 " 保存退出
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
@@ -84,6 +87,8 @@ nmap L $
 set incsearch
 " 开启大小写不敏感
 set ignorecase
+" 开始智能大小写
+set smartcase
 
 " 关闭兼容模式
 set nocompatible
@@ -194,3 +199,6 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
+
+" 全选
+nmap <C-a> ggVG
