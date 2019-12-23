@@ -22,6 +22,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'ternjs/tern_for_vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -41,6 +42,8 @@ syntax on
 set cursorline
 set wrap
 set showcmd
+"set clipboard=unnamedplus
+vnoremap Y "+y
 
 " 使用配色
 " theme 1
@@ -110,6 +113,7 @@ let g:coc_global_extensions = [
 			\ 'coc-tsserver',
 			\ 'coc-prettier',
 			\ 'coc-json',
+			\ 'coc-yank',
 			\ ]
 
 set hidden
@@ -177,6 +181,8 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "coc-prettier
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+"coc-yank
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
 "markdown preview
 nmap <silent> <F8> <Plug>MarkdownPreview       
@@ -206,3 +212,7 @@ inoremap <C-d> <DELETE>
 
 " 全选
 nmap <C-a> ggVG
+
+" 查找
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
