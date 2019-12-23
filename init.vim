@@ -64,6 +64,7 @@ let Powerline_symbols='fancy'
 set t_Co=256 " 状态栏就有颜色了
 let g:jsx_ext_required = 1
 let g:jsx_pragma_required = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " 设置自己的leader
 let mapleader=","
