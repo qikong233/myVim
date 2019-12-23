@@ -22,6 +22,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'ternjs/tern_for_vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'hail2u/vim-css3-syntax'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -37,14 +38,14 @@ syntax on
 
 " 使用配色
 " theme 1
-"set background=dark
-"colorscheme gruvbox
+set background=dark
+colorscheme gruvbox
 " theme 2
-set termguicolors     " enable true colors support
+"set termguicolors     " enable true colors support
 "let ayucolor="light"  " for light version of theme
 "let ayucolor="mirage" " for mirage version of theme
-let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+"let ayucolor="dark"   " for dark version of theme
+"colorscheme ayu
 
 " 打开文件类型检测
 filetype on
@@ -194,3 +195,11 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
+
+inoremap jj <esc>
+
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
