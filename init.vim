@@ -25,6 +25,20 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'mileszs/ack.vim'
 
 call plug#end()
+
+let g:startify_custom_header = [
+\ '',
+\ '		       _ _                     ____  __________',
+\ '		  __ _(_) | _____  _ __   __ _|___ \|___ /___ /',
+\ '		 / _` | | |/ / _ \|  _ \ / _` | __) | |_ \ |_ \',
+\ '		| (_| | |   < (_) | | | | (_| |/ __/ ___) |__) |',
+\ '		 \__, |_|_|\_\___/|_| |_|\__, |_____|____/____/',
+\ '		    |_|                  |___/',
+\ '',
+\ '                     [ My Neo Vim   Author:JiaJin ]             ',
+\ '',
+\]
+
 filetype plugin indent on    " required
 
 " vimrc 生效
