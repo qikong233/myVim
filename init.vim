@@ -23,6 +23,7 @@ Plug 'majutsushi/tagbar'
 Plug 'ternjs/tern_for_vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'hail2u/vim-css3-syntax'
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -33,8 +34,17 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 map <F3> :NERDTreeMirror<CR>
 map <F3> :NERDTreeToggle<CR>
 
+nnoremap <TAB> :NERDTreeMirror<CR>
+nnoremap <TAB> :NERDTreeToggle<CR>
+
 " 语法高亮
 syntax on
+
+set cursorline
+set wrap
+set showcmd
+"set clipboard=unnamedplus
+vnoremap Y "+y
 
 " 使用配色
 " theme 1
@@ -61,13 +71,13 @@ let Powerline_symbols='fancy'
 set t_Co=256 " 状态栏就有颜色了
 let g:jsx_ext_required = 1
 let g:jsx_pragma_required = 1
-
-" 进入打开nerdtree
-"let g:nerdtree_tabs_open_on_console_startup=1
+let g:airline#extensions#tabline#enabled = 1
 
 " 设置自己的leader
 let mapleader=","
 
+" 分屏
+nmap <Leader>v :vsplit<CR>
 " 保存退出
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
@@ -85,6 +95,8 @@ nmap L $
 set incsearch
 " 开启大小写不敏感
 set ignorecase
+" 开始智能大小写
+set smartcase
 
 " 关闭兼容模式
 set nocompatible
@@ -102,6 +114,7 @@ let g:coc_global_extensions = [
 			\ 'coc-tsserver',
 			\ 'coc-prettier',
 			\ 'coc-json',
+			\ 'coc-yank',
 			\ ]
 
 set hidden
@@ -169,6 +182,8 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "coc-prettier
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+"coc-yank
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
 "markdown preview
 nmap <silent> <F8> <Plug>MarkdownPreview       
@@ -196,10 +211,14 @@ inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 inoremap <C-d> <DELETE>
 
-inoremap jj <esc>
-
 augroup VimCSS3Syntax
   autocmd!
 
   autocmd FileType css setlocal iskeyword+=-
 augroup END
+" 全选
+nmap <C-a> ggVG
+
+" 查找
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
