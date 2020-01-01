@@ -24,6 +24,8 @@ Plug 'ternjs/tern_for_vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mileszs/ack.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()
 
@@ -36,7 +38,7 @@ let g:startify_custom_header = [
 \ '		 \__, |_|_|\_\___/|_| |_|\__, |_____|____/____/',
 \ '		    |_|                  |___/',
 \ '',
-\ '                     [ My Neo Vim   Author:JiaJin ]             ',
+\ '                        [ My Neo Vim   Author:JiaJin ]             ',
 \ '',
 \]
 
@@ -129,6 +131,7 @@ let g:coc_global_extensions = [
 			\ 'coc-prettier',
 			\ 'coc-json',
 			\ 'coc-yank',
+			\ 'coc-tsserver',
 			\ ]
 
 set hidden
@@ -236,3 +239,7 @@ nmap <C-a> ggVG
 " 查找
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
+
+" ts高亮
+let g:typescript_indent_disable = 1
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
