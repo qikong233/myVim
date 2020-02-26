@@ -26,6 +26,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'mileszs/ack.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'liuchengxu/space-vim-dark'
 
 call plug#end()
 
@@ -65,7 +66,8 @@ vnoremap Y "+y
 " 使用配色
 " theme 1
 set background=dark
-colorscheme gruvbox
+colorscheme space-vim-dark
+hi Comment cterm=italic
 " theme 2
 "set termguicolors     " enable true colors support
 "let ayucolor="light"  " for light version of theme
@@ -131,7 +133,8 @@ let g:coc_global_extensions = [
 			\ 'coc-prettier',
 			\ 'coc-json',
 			\ 'coc-yank',
-			\ 'coc-tsserver',
+			\ 'coc-css',
+			\ 'coc-highlight',
 			\ ]
 
 set hidden
@@ -243,3 +246,6 @@ nnoremap <Leader>a :Ack!<Space>
 " ts高亮
 let g:typescript_indent_disable = 1
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+
+" css高亮
+autocmd CursorHold * silent call CocActionAsync('highlight')
