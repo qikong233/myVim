@@ -27,6 +27,7 @@ Plug 'mileszs/ack.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'liuchengxu/space-vim-dark'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
