@@ -28,6 +28,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 call plug#end()
 
@@ -66,15 +67,15 @@ vnoremap Y "+y
 
 " 使用配色
 " theme 1
-set background=dark
-colorscheme space-vim-dark
-hi Comment cterm=italic
+"set background=dark
+"colorscheme space-vim-dark
+"hi Comment cterm=italic
 " theme 2
-"set termguicolors     " enable true colors support
+set termguicolors     " enable true colors support
 "let ayucolor="light"  " for light version of theme
-"let ayucolor="mirage" " for mirage version of theme
+let ayucolor="mirage" " for mirage version of theme
 "let ayucolor="dark"   " for dark version of theme
-"colorscheme ayu
+colorscheme ayu
 
 " 打开文件类型检测
 filetype on
@@ -125,6 +126,44 @@ nmap <Leader><space> :nohlsearch<CR>
 set wildmenu
 " 格式化
 nmap <Leader>p :Prettier
+
+" fzf setting
+" 让输入上方，搜索列表在下方
+let $FZF_DEFAULT_OPTS = '--layout=reverse'
+
+" 打开 fzf 的方式选择 floating window
+let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+
+function! OpenFloatingWin()
+  let height = &lines - 3
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  let col = float2nr((&columns - width) / 2)
+
+  " 设置浮动窗口打开的位置，大小等。
+  " 这里的大小配置可能不是那么的 flexible 有继续改进的空间
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': height * 0.3,
+        \ 'col': col + 30,
+        \ 'width': width * 2 / 3,
+        \ 'height': height / 2
+        \ }
+
+  let buf = nvim_create_buf(v:false, v:true)
+  let win = nvim_open_win(buf, v:true, opts)
+
+  " 设置浮动窗口高亮
+  call setwinvar(win, '&winhl', 'Normal:Pmenu')
+
+  setlocal
+        \ buftype=nofile
+        \ nobuflisted
+        \ bufhidden=hide
+        \ nonumber
+        \ norelativenumber
+        \ signcolumn=no
+endfunction
+nmap <Leader>s :FZF<CR>
 
 " coc config
 let g:coc_global_extensions = [
@@ -205,6 +244,7 @@ vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 "coc-yank
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+hi HighlightedyankRegion term=bold ctermbg=0 guibg=	#FF7F50
 
 "markdown preview
 nmap <silent> <F8> <Plug>MarkdownPreview       
@@ -250,3 +290,10 @@ autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
 " css高亮
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" vim-devicons
+set encoding=utf8
+set guifont=DroidSansMono\ Nerd\ Font:h11
+" vim-airline set fONT
+let g:airline_powerline_fonts = 1
+
