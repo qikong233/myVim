@@ -297,3 +297,8 @@ set guifont=DroidSansMono\ Nerd\ Font:h11
 " vim-airline set fONT
 let g:airline_powerline_fonts = 1
 
+" Enable folding
+set foldmethod=indent   
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
