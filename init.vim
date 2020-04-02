@@ -175,6 +175,7 @@ let g:coc_global_extensions = [
 			\ 'coc-yank',
 			\ 'coc-css',
 			\ 'coc-highlight',
+			\ 'coc-python',
 			\ ]
 
 set hidden
@@ -282,6 +283,7 @@ nmap <C-a> ggVG
 
 " 查找
 cnoreabbrev Ack Ack!
+let g:ackprg = 'ag --vimgrep'
 nnoremap <Leader>a :Ack!<Space>
 
 " ts高亮
