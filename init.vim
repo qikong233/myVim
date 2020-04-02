@@ -302,3 +302,8 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
+
+" python3 setup
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:loaded_python3_provider = 0
+
