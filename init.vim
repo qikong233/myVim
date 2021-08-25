@@ -18,7 +18,7 @@ Plug 'morhetz/gruvbox'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'mhinz/vim-startify'
-Plug 'scrooloose/nerdcommenter'
+Plug 'preservim/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'ternjs/tern_for_vim'
 Plug 'ayu-theme/ayu-vim'
@@ -29,6 +29,9 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+"Dart/Flutter
+Plug 'dart-lang/dart-vim-plugin'
 
 call plug#end()
 
@@ -53,8 +56,10 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 map <F3> :NERDTreeMirror<CR>
 map <F3> :NERDTreeToggle<CR>
 
+if !exists('g:vscode')
 nnoremap <TAB> :NERDTreeMirror<CR>
 nnoremap <TAB> :NERDTreeToggle<CR>
+endif
 
 " 语法高亮
 syntax on
@@ -62,6 +67,8 @@ syntax on
 set cursorline
 set wrap
 set showcmd
+set shiftwidth=4
+set ts=2
 "set clipboard=unnamedplus
 vnoremap Y "+y
 
@@ -102,11 +109,19 @@ nmap <Leader>v :vsplit<CR>
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
 
+if !exists('g:vscode')
 " 设置界面跳转
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+else 
+" vscode配置
+nnoremap <silent> <C-j> :call VSCodeNotify('workbench.action.navigateDown')<CR>
+nnoremap <silent> <C-k> :call VSCodeNotify('workbench.action.navigateUp')<CR>
+nnoremap <silent> <C-h> :call VSCodeNotify('workbench.action.navigateLeft')<CR>
+nnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
+endif
 " 行尾 行首
 nmap H ^
 nmap L $
@@ -307,5 +322,4 @@ set foldlevel=2
 
 " python3 setup
 let g:python3_host_prog = '/usr/local/bin/python3'
-let g:loaded_python3_provider = 0
 
