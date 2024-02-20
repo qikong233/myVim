@@ -5,13 +5,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'dracula/vim', { 'name': 'dracula' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'prettier/vim-prettier'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'dyng/ctrlsf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
@@ -21,7 +18,6 @@ Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'ternjs/tern_for_vim'
-Plug 'ayu-theme/ayu-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mileszs/ack.vim'
 Plug 'leafgarland/typescript-vim'
@@ -29,6 +25,11 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" themes
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 "Dart/Flutter
 Plug 'dart-lang/dart-vim-plugin'
@@ -78,11 +79,7 @@ vnoremap Y "+y
 "colorscheme space-vim-dark
 "hi Comment cterm=italic
 " theme 2
-set termguicolors     " enable true colors support
-"let ayucolor="light"  " for light version of theme
-let ayucolor="mirage" " for mirage version of theme
-"let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+colorscheme catppuccin-mocha
 
 " 打开文件类型检测
 filetype on
