@@ -1,37 +1,66 @@
 call plug#begin('~/.vim/plugged')
 
+" Vim plug-in manager
 Plug 'VundleVim/Vundle.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Themes
+" vim dark theme
 Plug 'dracula/vim', { 'name': 'dracula' }
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'prettier/vim-prettier'
-Plug 'dyng/ctrlsf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'morhetz/gruvbox'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'iamcco/mathjax-support-for-mkdp'
-Plug 'mhinz/vim-startify'
-Plug 'preservim/nerdcommenter'
-Plug 'majutsushi/tagbar'
-Plug 'ternjs/tern_for_vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'mileszs/ack.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'liuchengxu/space-vim-dark'
-Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" themes
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'liuchengxu/space-vim-dark'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+" start page logo
+Plug 'mhinz/vim-startify'
 
-"Dart/Flutter
+" Search
+" asynchronous searching
+Plug 'dyng/ctrlsf.vim'
+" search plugin
+Plug 'mileszs/ack.vim'
+" blur searching
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Code format
+Plug 'prettier/vim-prettier'
+
+" Git plugin
+Plug 'tpope/vim-fugitive'
+
+" System exploder
+Plug 'scrooloose/nerdtree'
+
+" markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> ':call mkdp#util#install()' }, 'for': 'markdown'  }
+" markdown preview - mathjax support
+Plug 'iamcco/mathjax-support-for-mkdp'
+
+" Tools
+" comment plugin
+Plug 'preservim/nerdcommenter'
+" display tags in a window
+Plug 'majutsushi/tagbar'
+" jump to define
+Plug 'ternjs/tern_for_vim'
+" file type icon
+Plug 'ryanoasis/vim-devicons'
+" highlight for brackets 
+Plug 'luochen1990/rainbow'
+
+" Font-end Plugin
+" HTML code auto complete
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+" JavaScript bundle for vim(provide syntax highlighting)
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+" css3 bundle 
+Plug 'hail2u/vim-css3-syntax'
+
+
+" Dart/Flutter
 Plug 'dart-lang/dart-vim-plugin'
 
 call plug#end()
@@ -49,18 +78,35 @@ let g:startify_custom_header = [
 \ '',
 \]
 
+" rainbow config
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\   'guifgs': ['darkorange3', 'seagreen3', 'royalblue3', 'firebrick'],
+\   'ctermfgs': ['lightyellow', 'lightcyan','lightblue', 'lightmagenta'],
+\   'operators': '_,_',
+\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\   'separately': {
+\       '*': {},
+\       'tex': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+\       },
+\       'lisp': {
+\           'guifgs': ['darkorange3', 'seagreen3', 'royalblue3', 'firebrick'],
+\       },
+\       'vim': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\       },
+\       'html': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\       'css': 0,
+\   }
+\}
+
 filetype plugin indent on    " required
 
 " vimrc 生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
-
-map <F3> :NERDTreeMirror<CR>
-map <F3> :NERDTreeToggle<CR>
-
-if !exists('g:vscode')
-nnoremap <TAB> :NERDTreeMirror<CR>
-nnoremap <TAB> :NERDTreeToggle<CR>
-endif
 
 " 语法高亮
 syntax on
@@ -97,31 +143,9 @@ let g:jsx_ext_required = 1
 let g:jsx_pragma_required = 1
 let g:airline#extensions#tabline#enabled = 1
 
-" 设置自己的leader
-let mapleader=","
+lua require("common")
+lua require("edit")
 
-" 分屏
-nmap <Leader>v :vsplit<CR>
-" 保存退出
-nmap <Leader>w :w<CR>
-nmap <Leader>q :q<CR>
-
-if !exists('g:vscode')
-" 设置界面跳转
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-else 
-" vscode配置
-nnoremap <silent> <C-j> :call VSCodeNotify('workbench.action.navigateDown')<CR>
-nnoremap <silent> <C-k> :call VSCodeNotify('workbench.action.navigateUp')<CR>
-nnoremap <silent> <C-h> :call VSCodeNotify('workbench.action.navigateLeft')<CR>
-nnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
-endif
-" 行尾 行首
-nmap H ^
-nmap L $
 
 " 设置实时搜索
 set incsearch
@@ -132,19 +156,17 @@ set smartcase
 
 " 关闭兼容模式
 set nocompatible
-" 清除当前搜索高亮
-nmap <Leader><space> :nohlsearch<CR>
 " 开启vim命令自身命令行模式智能补全
 set wildmenu
-" 格式化
-nmap <Leader>p :Prettier
 
 " fzf setting
-" 让输入上方，搜索列表在下方
-let $FZF_DEFAULT_OPTS = '--layout=reverse'
+" Input on the top & use bat preview
+let $FZF_DEFAULT_OPTS = "--layout=reverse --preview 'bat --color=always {}'"
 
-" 打开 fzf 的方式选择 floating window
-let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+" use floating window to open fzf
+"let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+" set fzf window size
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 
 function! OpenFloatingWin()
   let height = &lines - 3
@@ -175,123 +197,12 @@ function! OpenFloatingWin()
         \ norelativenumber
         \ signcolumn=no
 endfunction
-nmap <Leader>s :FZF<CR>
-
-" coc config
-let g:coc_global_extensions = [
-			\ 'coc-snippets',
-			\ 'coc-pairs',
-			\ 'coc-tsserver',
-			\ 'coc-prettier',
-			\ 'coc-json',
-			\ 'coc-yank',
-			\ 'coc-css',
-			\ 'coc-highlight',
-			\ 'coc-python',
-			\ ]
-
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-autocmd CursorHold * silent call CocActionAsync('highlight')
-nmap <leader>rn <Plug>(coc-rename)
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-augroup mygroup
-  autocmd!
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>ac  <Plug>(coc-codeaction)
-nmap <leader>qf  <Plug>(coc-fix-current)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-nmap <silent> <C-d> <Plug>(coc-range-select)
-xmap <silent> <C-d> <Plug>(coc-range-select)
-command! -nargs=0 Format :call CocAction('format')
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-"coc-prettier
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-"coc-yank
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-hi HighlightedyankRegion term=bold ctermbg=0 guibg=	#FF7F50
-
-"markdown preview
-nmap <silent> <F8> <Plug>MarkdownPreview       
-imap <silent> <F8> <Plug>MarkdownPreview        
-nmap <silent> <F9> <Plug>StopMarkdownPreview    
-imap <silent> <F9> <Plug>StopMarkdownPreview    
-
-"代码移动
-nmap <C-j> mz:m+<cr>`z
-nmap <C-k> mz:m-2<cr>`z
-vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z 
-
-" 快速调整
-nmap J 3j
-nmap K 3k
-
-" tagbar
-nmap <F5> :TagbarToggle<CR>
-
-" 输入模式下映射
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap <C-d> <DELETE>
 
 augroup VimCSS3Syntax
   autocmd!
 
   autocmd FileType css setlocal iskeyword+=-
 augroup END
-" 全选
-nmap <C-a> ggVG
 
 " 查找
 cnoreabbrev Ack Ack!
@@ -301,9 +212,6 @@ nnoremap <Leader>a :Ack!<Space>
 " ts高亮
 let g:typescript_indent_disable = 1
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-
-" css高亮
-autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " vim-devicons
 set encoding=utf8
